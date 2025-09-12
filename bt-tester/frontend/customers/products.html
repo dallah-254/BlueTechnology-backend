@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Blue Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #004ccc;
+            --secondary: #003a9d;
+            --accent: #00c2ff;
+            --accent-light: #5cd7ff;
+            --light: #f5f9ff;
+            --dark: #0a1a35;
+            --gray: #6b7280;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+            margin-right: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            white-space: nowrap;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 6rem 1rem 3rem;
+            background: linear-gradient(to bottom, rgba(0, 60, 157, 0.8), rgba(0, 102, 255, 0.7)), url('https://images.unsplash.com/photo-1468436139062-f60a71c5c892?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=40') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .page-header p {
+            font-size: 0.9rem;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            padding: 3rem 1rem;
+            background: white;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-card.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+        }
+        
+        .category-card.active .category-icon {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .category-card.active .category-title {
+            color: white;
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .category-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        /* Products Section */
+        .products-section {
+            padding: 3rem 1rem;
+            background-color: #f5f5f5;
+        }
+        
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem;
+            width: 100%;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--danger);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .product-info {
+            padding: 1.2rem;
+        }
+        
+        .product-category {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-links.active {
+            display: flex;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            flex-direction: column;
+            padding: 1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* subtle shadow */
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        
+        .product-rating i {
+            color: var(--warning);
+            font-size: 0.8rem;
+            margin-right: 0.1rem;
+        }
+        
+        .product-rating span {
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .current-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .original-price {
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            color: var(--gray);
+            margin-left: 0.5rem;
+        }
+        
+        .discount {
+            font-size: 0.8rem;
+            color: var(--danger);
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            flex-grow: 1;
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+        
+        .wishlist {
+            background: #f8f9fa;
+            color: var(--dark);
+            border: 1px solid #ddd;
+            padding: 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .wishlist:hover {
+            background: #e9ecef;
+            color: var(--danger);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination button {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .pagination button:hover:not(.active) {
+            background: #f8f9fa;
+        }
+        
+        /* No products message */
+        .no-products {
+            text-align: center;
+            padding: 3rem;
+            grid-column: 1 / -1;
+            color: var(--gray);
+        }
+        
+        /* Loading spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast i {
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1rem 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 194, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            
+            .page-header {
+                padding: 7rem 1.5rem 4rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .categories-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .products-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .filter-bar {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: auto;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            header {
+                padding: 0.5rem 2rem;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .page-header {
+                padding: 8rem 2rem 5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .categories-section {
+                padding: 6rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 2rem;
+            }
+            
+            .products-section {
+                padding: 6rem 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+            
+            footer {
+                padding: 5rem 2rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                margin-left: 1rem;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* subtle shadow */
+            }
+            
+            .nav-links.active a {
+                padding: 0.8rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="logo">
+            <img src="http://bt-images-045854052038.s3-website-us-east-1.amazonaws.com/logo-b.png" alt="Blue Technology Logo" class="logo-icon">
+        </div>
+        
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="blog.html">Tips/Blog</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <button class="cta-button" onclick="window.location.href='cart.html'">Cart (<span id="cart-count">0</span>)</button>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Our Electronics Collection</h1>
+        <p>Discover the latest phones, laptops, and accessories at competitive prices</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="section-title">Browse Categories</h2>
+
+        <div class="categories-grid">
+            <!-- All Products -->
+            <div class="category-card active" data-category="all">
+                <div class="category-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <h3 class="category-title">All Products</h3>
+            </div>
+
+            <!-- Mobile Phones -->
+            <div class="category-card" data-category="smartphones">
+                <div class="category-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="category-title">Mobile Phones</h3>
+            </div>
+
+            <!-- Laptops & Computers -->
+            <div class="category-card" data-category="laptops">
+                <div class="category-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 class="category-title">Laptops & Computers</h3>
+            </div>
+
+            <!-- TVs & Home Entertainment -->
+            <div class="category-card" data-category="home-entertainment">
+                <div class="category-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
+                <h3 class="category-title">TVs & Home Entertainment</h3>
+            </div>
+
+            <!-- Audio & Headphones -->
+            <div class="category-card" data-category="audio">
+                <div class="category-icon">
+                    <i class="fas fa-headphones-alt"></i>
+                </div>
+                <h3 class="category-title">Audio & Headphones</h3>
+            </div>
+
+            <!-- Cameras & Drones -->
+            <div class="category-card" data-category="cameras-drones">
+                <div class="category-icon">
+                    <i class="fas fa-camera-retro"></i>
+                </div>
+                <h3 class="category-title">Cameras & Drones</h3>
+            </div>
+
+            <!-- Gaming & Consoles -->
+            <div class="category-card" data-category="gaming">
+                <div class="category-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="category-title">Gaming & Consoles</h3>
+            </div>
+
+            <!-- Smart Home Devices -->
+            <div class="category-card" data-category="smart-home">
+                <div class="category-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3 class="category-title">Smart Home Devices</h3>
+            </div>
+
+            <!-- Wearables -->
+            <div class="category-card" data-category="wearables">
+                <div class="category-icon">
+                    <i class="fas fa-watch-smart"></i>
+                </div>
+                <h3 class="category-title">Wearables</h3>
+            </div>
+
+            <!-- Accessories & Cables -->
+            <div class="category-card" data-category="accessories">
+                <div class="category-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3 class="category-title">Accessories & Cables</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="products-container">
+            <div class="filter-bar">
+                <div class="filter-options">
+                    <select class="filter-select" id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="smartphones">Smartphones</option>
+                        <option value="laptops">Laptops</option>
+                        <option value="tablets">Tablets</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="home-entertainment">Home Entertainment</option>
+                        <option value="audio">Audio</option>
+                        <option value="cameras-drones">Cameras & Drones</option>
+                        <option value="gaming">Gaming</option>
+                        <option value="smart-home">Smart Home</option>
+                        <option value="wearables">Wearables</option>
+                    </select>
+                    
+                    <select class="filter-select" id="sort-filter">
+                        <option value="default">Default Sorting</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search products...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="products-grid" id="products-grid">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be loaded here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Product added to cart!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Blue Technology</h3>
+                <p>Your trusted partner for all technology needs. We provide quality electronics and excellent service.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <span>123 Tech Street, Nairobi, Kenya</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <span>+254 712 345 678</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>info@bluetechnology.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Blue Technology. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // API Configuration - Cart endpoints only
+        const API_BASE_URL = 'http://localhost:5000/api';
+        const CART_API = `${API_BASE_URL}/cart`;
+        const CART_COUNT_API = `${CART_API}/count`;
+
+        // Global variables
+        let currentPage = 1;
+        const productsPerPage = 8;
+        let currentCategory = 'all';
+        let currentSort = 'default';
+        let currentSearch = '';
+        let cartCount = 0;
+
+        // Products array - Will be populated with your products
+        const allProducts = [
+                    // Smartphones (8 products)
+                    { _id: '1', name: 'iPhone 13 Pro', category: 'smartphones', price: 124999, original_price: 134999, 
+                    image: 'https://images.unsplash.com/photo-1632661674596-618e45e56c53?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 142, badge: 'New' },
+                    { _id: '2', name: 'Samsung Galaxy S22', category: 'smartphones', price: 109999, original_price: 119999, 
+                    image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 98, badge: 'Popular' },
+                    { _id: '3', name: 'Google Pixel 6', category: 'smartphones', price: 89999, original_price: null, 
+                    image: 'https://images.unsplash.com/photo-1634034379073-f689b460a3fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 76, badge: null },
+                    { _id: '4', name: 'OnePlus 10 Pro', category: 'smartphones', price: 94999, original_price: 99999, 
+                    image: 'https://images.unsplash.com/photo-1651058006427-8d5c7054ec95?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 63, badge: 'Sale' },
+                    { _id: '5', name: 'Xiaomi 12', category: 'smartphones', price: 79999, original_price: 84999, 
+                    image: 'https://images.unsplash.com/photo-1649859394614-dc4f7290b7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 87, badge: null },
+                    { _id: '6', name: 'Huawei P50 Pro', category: 'smartphones', price: 104999, original_price: 114999, 
+                    image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 54, badge: null },
+                    { _id: '7', name: 'Oppo Find X5', category: 'smartphones', price: 89999, original_price: 94999, 
+                    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.2, reviews: 41, badge: null },
+                    { _id: '8', name: 'Vivo X80', category: 'smartphones', price: 84999, original_price: 89999, 
+                    image: 'https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.1, reviews: 38, badge: null },
+                    
+                    // Laptops (8 products)
+                    { _id: '9', name: 'MacBook Pro 16"', category: 'laptops', price: 249999, original_price: 269999, 
+                    image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.9, reviews: 203, badge: 'New' },
+                    { _id: '10', name: 'Dell XPS 15', category: 'laptops', price: 189999, original_price: 199999, 
+                    image: 'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 156, badge: 'Popular' },
+                    { _id: '11', name: 'HP Spectre x360', category: 'laptops', price: 159999, original_price: null, 
+                    image: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 132, badge: null },
+                    { _id: '12', name: 'Lenovo ThinkPad X1', category: 'laptops', price: 174999, original_price: 189999, 
+                    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 98, badge: 'Sale' },
+                    { _id: '13', name: 'ASUS ROG Zephyrus', category: 'laptops', price: 199999, original_price: 219999, 
+                    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 121, badge: 'Gaming' },
+                    { _id: '14', name: 'Microsoft Surface Laptop 4', category: 'laptops', price: 169999, original_price: 179999, 
+                    image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 87, badge: null },
+                    { _id: '15', name: 'Acer Swift 3', category: 'laptops', price: 89999, original_price: 94999, 
+                    image: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 64, badge: null },
+                    { _id: '16', name: 'Razer Blade 15', category: 'laptops', price: 219999, original_price: 239999, 
+                    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 112, badge: 'Gaming' },
+                    
+                    // Tablets (8 products)
+                    { _id: '17', name: 'iPad Pro 12.9"', category: 'tablets', price: 129999, original_price: 139999, 
+                    image: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.9, reviews: 178, badge: 'New' },
+                    { _id: '18', name: 'Samsung Galaxy Tab S8', category: 'tablets', price: 99999, original_price: 109999, 
+                    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 132, badge: 'Popular' },
+                    { _id: '19', name: 'Microsoft Surface Pro 8', category: 'tablets', price: 119999, original_price: null, 
+                    image: 'https://images.unsplash.com/photo-1544033527-b192daee1f5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 97, badge: null },
+                    { _id: '20', name: 'Lenovo Tab P11 Pro', category: 'tablets', price: 69999, original_price: 74999, 
+                    image: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 76, badge: 'Sale' },
+                    { _id: '21', name: 'Huawei MatePad Pro', category: 'tablets', price: 79999, original_price: 84999, 
+                    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 63, badge: null },
+                    { _id: '22', name: 'Amazon Fire HD 10', category: 'tablets', price: 29999, original_price: 34999, 
+                    image: 'https://images.unsplash.com/photo-1544033527-b192daee1f5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.1, reviews: 142, badge: 'Budget' },
+                    { _id: '23', name: 'Xiaomi Pad 5', category: 'tablets', price: 54999, original_price: 59999, 
+                    image: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 88, badge: null },
+                    { _id: '24', name: 'iPad Air', category: 'tablets', price: 89999, original_price: 94999, 
+                    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 121, badge: null },
+                    
+                    // Accessories (8 products)
+                    { _id: '25', name: 'Wireless Charger', category: 'accessories', price: 4999, original_price: 5999, 
+                    image: 'https://images.unsplash.com/photo-1609091839311-d5365f2e0c5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 87, badge: null },
+                    { _id: '26', name: 'Bluetooth Earbuds', category: 'accessories', price: 8999, original_price: 9999, 
+                    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 132, badge: 'Popular' },
+                    { _id: '27', name: 'Phone Case', category: 'accessories', price: 2499, original_price: null, 
+                    image: 'https://images.unsplash.com/photo-1601593346740-9d124c79c6c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.2, reviews: 214, badge: null },
+                    { _id: '28', name: 'USB-C Cable', category: 'accessories', price: 1499, original_price: 1999, 
+                    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.1, reviews: 187, badge: 'Sale' },
+                    { _id: '29', name: 'Power Bank 20000mAh', category: 'accessories', price: 7999, original_price: 8999, 
+                    image: 'https://images.unsplash.com/photo-1598935898636-1c6c54bc71f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 156, badge: null },
+                    { _id: '30', name: 'Laptop Stand', category: 'accessories', price: 5999, original_price: 6999, 
+                    image: 'https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 98, badge: null },
+                    { _id: '31', name: 'Wireless Mouse', category: 'accessories', price: 3999, original_price: 4999, 
+                    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 112, badge: null },
+                    { _id: '32', name: 'Screen Protector', category: 'accessories', price: 1999, original_price: 2499, 
+                    image: 'https://images.unsplash.com/photo-1605346576606-8b2f9e5f9e5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.0, reviews: 176, badge: null },
+                    
+                    // Home Entertainment (8 products)
+                    { _id: '33', name: 'Samsung 55" 4K TV', category: 'home-entertainment', price: 79999, original_price: 89999, 
+                    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 143, badge: 'Sale' },
+                    { _id: '34', name: 'Sony Soundbar', category: 'home-entertainment', price: 34999, original_price: 39999, 
+                    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 87, badge: null },
+                    { _id: '35', name: 'LG OLED 65" TV', category: 'home-entertainment', price: 149999, original_price: 159999, 
+                    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.9, reviews: 112, badge: 'Premium' },
+                    { _id: '36', name: 'Projector HD', category: 'home-entertainment', price: 29999, original_price: 34999, 
+                    image: 'https://images.unsplash.com/photo-1593341646782-e0b495cff86d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 76, badge: null },
+                    { _id: '37', name: 'Home Theater System', category: 'home-entertainment', price: 49999, original_price: 54999, 
+                    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 64, badge: null },
+                    { _id: '38', name: 'Streaming Device', category: 'home-entertainment', price: 6999, original_price: 7999, 
+                    image: 'https://images.unsplash.com/photo-1593341646782-e0b495cff86d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 132, badge: 'Popular' },
+                    { _id: '39', name: 'Smart TV Box', category: 'home-entertainment', price: 8999, original_price: 9999, 
+                    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.2, reviews: 98, badge: null },
+                    { _id: '40', name: 'TV Wall Mount', category: 'home-entertainment', price: 5999, original_price: 6999, 
+                    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.1, reviews: 87, badge: null },
+                    
+                    // Audio (8 products)
+                    { _id: '41', name: 'Sony WH-1000XM4', category: 'audio', price: 29999, original_price: 34999, 
+                    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 243, badge: 'Best Seller' },
+                    { _id: '42', name: 'Bose QuietComfort 35', category: 'audio', price: 27999, original_price: 29999, 
+                    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 187, badge: null },
+                    { _id: '43', name: 'AirPods Pro', category: 'audio', price: 24999, original_price: 27999, 
+                    image: 'https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 198, badge: 'Popular' },
+                    { _id: '44', name: 'JBL Flip 5 Speaker', category: 'audio', price: 8999, original_price: 9999, 
+                    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 132, badge: null },
+                    { _id: '45', name: 'Sennheiser HD 660S', category: 'audio', price: 39999, original_price: 44999, 
+                    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.9, reviews: 87, badge: 'Premium' },
+                    { _id: '46', name: 'Marshall Speaker', category: 'audio', price: 19999, original_price: 21999, 
+                    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 76, badge: null },
+                    { _id: '47', name: 'Beats Studio Buds', category: 'audio', price: 17999, original_price: 19999, 
+                    image: 'https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 112, badge: null },
+                    { _id: '48', name: 'Audio-Technica Headphones', category: 'audio', price: 14999, original_price: 16999, 
+                    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 94, badge: 'Sale' },
+                    
+                    // Cameras & Drones (8 products)
+                    { _id: '49', name: 'Canon EOS R5', category: 'cameras-drones', price: 399999, original_price: 429999, 
+                    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.9, reviews: 67, badge: 'Professional' },
+                    { _id: '50', name: 'Sony A7III', category: 'cameras-drones', price: 299999, original_price: 319999, 
+                    image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 89, badge: null },
+                    { _id: '51', name: 'Nikon Z6', category: 'cameras-drones', price: 279999, original_price: 299999, 
+                    image: 'https://images.unsplash.com/photo-1581591524425-c7e0978865fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 76, badge: 'Sale' },
+                    { _id: '52', name: 'DJI Mavic Air 2', category: 'cameras-drones', price: 129999, original_price: 139999, 
+                    image: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 112, badge: 'Popular' },
+                    { _id: '53', name: 'GoPro Hero 10', category: 'cameras-drones', price: 49999, original_price: 54999, 
+                    image: 'https://images.unsplash.com/photo-1624908063222-9d2d5f4f3c8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 143, badge: 'Action' },
+                    { _id: '54', name: 'Fujifilm X-T4', category: 'cameras-drones', price: 199999, original_price: 219999, 
+                    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 54, badge: null },
+                    { _id: '55', name: 'Canon EOS 90D', category: 'cameras-drones', price: 149999, original_price: 159999, 
+                    image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 87, badge: null },
+                    { _id: '56', name: 'DJI Mini 2', category: 'cameras-drones', price: 79999, original_price: 84999, 
+                    image: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 98, badge: 'Beginner' },
+                    
+                    // Gaming (8 products)
+                    { _id: '57', name: 'PlayStation 5', category: 'gaming', price: 69999, original_price: 74999, 
+                    image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.9, reviews: 287, badge: 'Hot' },
+                    { _id: '58', name: 'Xbox Series X', category: 'gaming', price: 64999, original_price: 69999, 
+                    image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 214, badge: null },
+                    { _id: '59', name: 'Nintendo Switch', category: 'gaming', price: 39999, original_price: 44999, 
+                    image: 'https://images.unsplash.com/photo-1580327344181-a8c47c8a137f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 198, badge: 'Family' },
+                    { _id: '60', name: 'Gaming Chair', category: 'gaming', price: 24999, original_price: 27999, 
+                    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 132, badge: null },
+                    { _id: '61', name: 'Gaming Mouse', category: 'gaming', price: 8999, original_price: 9999, 
+                    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 176, badge: null },
+                    { _id: '62', name: 'Gaming Keyboard', category: 'gaming', price: 12999, original_price: 14999, 
+                    image: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 143, badge: 'Mechanical' },
+                    { _id: '63', name: 'VR Headset', category: 'gaming', price: 29999, original_price: 34999, 
+                    image: 'https://images.unsplash.com/photo-1593118247619-e2d6f056869e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.2, reviews: 87, badge: null },
+                    { _id: '64', name: 'Gaming Monitor', category: 'gaming', price: 39999, original_price: 44999, 
+                    image: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 98, badge: '144Hz' },
+                    
+                    // Smart Home (8 products)
+                    { _id: '65', name: 'Smart Thermostat', category: 'smart-home', price: 14999, original_price: 16999, 
+                    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 132, badge: 'Energy Saving' },
+                    { _id: '66', name: 'Smart Doorbell', category: 'smart-home', price: 19999, original_price: 21999, 
+                    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 98, badge: 'Security' },
+                    { _id: '67', name: 'Smart Light Bulbs', category: 'smart-home', price: 4999, original_price: 5999, 
+                    image: 'https://images.unsplash.com/photo-1517777173012-5c0f7a2b5b7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 187, badge: 'Popular' },
+                    { _id: '68', name: 'Smart Plug', category: 'smart-home', price: 2999, original_price: 3499, 
+                    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.2, reviews: 154, badge: null },
+                    { _id: '69', name: 'Robot Vacuum', category: 'smart-home', price: 34999, original_price: 39999, 
+                    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 112, badge: 'Cleaning' },
+                    { _id: '70', name: 'Smart Lock', category: 'smart-home', price: 24999, original_price: 27999, 
+                    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 76, badge: 'Security' },
+                    { _id: '71', name: 'Smart Speaker', category: 'smart-home', price: 8999, original_price: 9999, 
+                    image: 'https://images.unsplash.com/photo-1543512214-318c7553f230?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 198, badge: 'Voice Assistant' },
+                    { _id: '72', name: 'Security Camera', category: 'smart-home', price: 12999, original_price: 14999, 
+                    image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 143, badge: 'HD' },
+                    
+                    // Wearables (8 products)
+                    { _id: '73', name: 'Apple Watch Series 7', category: 'wearables', price: 49999, original_price: 54999, 
+                    image: 'https://images.unsplash.com/photo-1579586337278-3f436f25d4d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.8, reviews: 187, badge: 'New' },
+                    { _id: '74', name: 'Samsung Galaxy Watch 4', category: 'wearables', price: 34999, original_price: 39999, 
+                    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.6, reviews: 132, badge: 'Popular' },
+                    { _id: '75', name: 'Fitbit Charge 5', category: 'wearables', price: 19999, original_price: 21999, 
+                    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 176, badge: 'Fitness' },
+                    { _id: '76', name: 'Garmin Forerunner 245', category: 'wearables', price: 29999, original_price: 32999, 
+                    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.7, reviews: 98, badge: 'Running' },
+                    { _id: '77', name: 'Xiaomi Mi Band 6', category: 'wearables', price: 4999, original_price: 5999, 
+                    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.4, reviews: 243, badge: 'Budget' },
+                    { _id: '78', name: 'Fossil Gen 6', category: 'wearables', price: 24999, original_price: 27999, 
+                    image: 'https://images.unsplash.com/photo-1579586337278-3f436f25d4d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.3, reviews: 87, badge: 'Classic' },
+                    { _id: '79', name: 'Amazfit GTR 3', category: 'wearables', price: 14999, original_price: 16999, 
+                    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.2, reviews: 76, badge: null },
+                    { _id: '80', name: 'Huawei Watch GT 3', category: 'wearables', price: 19999, original_price: 21999, 
+                    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', 
+                    rating: 4.5, reviews: 112, badge: null }
+                ];
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navLinks && navLinks.classList.contains('active') &&
+                !e.target.closest('.nav-container')) {
+                navLinks.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            }
+        });
+
+        // API Service Functions for cart only
+        async function addToCartAPI(productId, quantity = 1) {
+            try {
+                const headers = {
+                    'Content-Type': 'application/json',
+                };
+                // If using authentication, add Authorization header here:
+                // if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+
+                const response = await fetch(CART_API, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({
+                        productId: productId,
+                        quantity: quantity
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                throw error;
+            }
+        }
+
+        async function getCartCount() {
+            try {
+                const headers = {};
+                // if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+
+                const response = await fetch(CART_COUNT_API, { headers });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.count || 0;
+            } catch (error) {
+                console.error('Error fetching cart count:', error);
+                return 0;
+            }
+        }
+
+        // Product display functions
+        function displayProducts(productsToDisplay, totalCount, page = 1) {
+            const productsGrid = document.getElementById('products-grid');
+            if (!productsGrid) return;
+
+            productsGrid.innerHTML = '';
+
+            if (!productsToDisplay || productsToDisplay.length === 0) {
+                productsGrid.innerHTML = '<div class="no-products">No products found. Try a different search or filter.</div>';
+                setupPagination(0, page);
+                return;
+            }
+
+            productsToDisplay.forEach(product => {
+                const discount = product.original_price
+                    ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
+                    : 0;
+
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card animated';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-rating">
+                            ${generateStarRating(product.rating)}
+                            <span>(${product.reviews})</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">KSh ${product.price.toLocaleString()}</span>
+                            ${product.original_price ? `<span class="original-price">KSh ${product.original_price.toLocaleString()}</span>` : ''}
+                            ${product.original_price ? `<span class="discount">${discount}% off</span>` : ''}
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="${product._id}">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                `;
+
+                productsGrid.appendChild(productCard);
+
+                // Animate in
+                setTimeout(() => {
+                    productCard.classList.add('animate-in');
+                }, 100);
+            });
+
+            setupProductInteractions();
+            setupPagination(totalCount, page);
+        }
+
+        function generateStarRating(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+
+            return stars;
+        }
+
+        function setupPagination(totalProducts, currentPage) {
+            const paginationContainer = document.getElementById('pagination');
+            if (!paginationContainer) return;
+
+            paginationContainer.innerHTML = '';
+
+            const totalPages = Math.ceil(totalProducts / productsPerPage);
+            if (totalPages <= 1) return;
+
+            // Previous button
+            const prevButton = document.createElement('button');
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            if (currentPage === 1) {
+                prevButton.disabled = true;
+                prevButton.style.opacity = '0.5';
+            } else {
+                prevButton.addEventListener('click', () => {
+                    changePage(currentPage - 1);
+                });
+            }
+            paginationContainer.appendChild(prevButton);
+
+            // Page buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => {
+                    changePage(i);
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            if (currentPage === totalPages) {
+                nextButton.disabled = true;
+                nextButton.style.opacity = '0.5';
+            } else {
+                nextButton.addEventListener('click', () => {
+                    changePage(currentPage + 1);
+                });
+            }
+            paginationContainer.appendChild(nextButton);
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            filterAndSortProducts();
+            window.scrollTo({ top: document.getElementById('products-grid').offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function filterAndSortProducts() {
+            try {
+                const productsGrid = document.getElementById('products-grid');
+                productsGrid.innerHTML = `
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+
+                // Simulate API delay for better UX
+                setTimeout(() => {
+                    let filteredProducts = [...allProducts];
+                    
+                    // Filter by category
+                    if (currentCategory !== 'all') {
+                        filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
+                    }
+                    
+                    // Search by name
+                    if (currentSearch) {
+                        const searchTerm = currentSearch.toLowerCase();
+                        filteredProducts = filteredProducts.filter(p => 
+                            p.name.toLowerCase().includes(searchTerm)
+                        );
+                    }
+                    
+                    // Sort products
+                    if (currentSort !== 'default') {
+                        switch(currentSort) {
+                            case 'price-low':
+                                filteredProducts.sort((a, b) => a.price - b.price);
+                                break;
+                            case 'price-high':
+                                filteredProducts.sort((a, b) => b.price - a.price);
+                                break;
+                            case 'popular':
+                                filteredProducts.sort((a, b) => b.reviews - a.reviews);
+                                break;
+                            case 'newest':
+                                // For demo purposes, we'll sort by ID (newer products have higher IDs)
+                                filteredProducts.sort((a, b) => b._id - a._id);
+                                break;
+                        }
+                    }
+                    
+                    // Pagination
+                    const startIndex = (currentPage - 1) * productsPerPage;
+                    const endIndex = startIndex + parseInt(productsPerPage);
+                    const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+                    
+                    displayProducts(paginatedProducts, filteredProducts.length, currentPage);
+                }, 300); // Small delay to show loading spinner
+            } catch (error) {
+                console.error('Error filtering products:', error);
+                showToast('Error loading products. Please try again.');
+            }
+        }
+
+        // Add to cart functionality
+        function setupProductInteractions() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const wishlistButtons = document.querySelectorAll('.wishlist');
+            const cartCountElement = document.getElementById('cart-count');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const productId = e.target.getAttribute('data-id');
+                    const product = allProducts.find(p => p._id === productId);
+
+                    if (product) {
+                        try {
+                            await addToCartAPI(productId);
+                            cartCount = await getCartCount();
+                            
+                            showToast(`${product.name} added to cart!`);
+
+                            e.target.textContent = 'Added!';
+                            e.target.style.background = 'var(--success)';
+
+                            setTimeout(() => {
+                                e.target.textContent = 'Add to Cart';
+                                e.target.style.background = 'var(--primary)';
+                            }, 1500);
+                            
+                            // Update cart count
+                            if (cartCountElement) {
+                                cartCountElement.textContent = cartCount;
+                            }
+                        } catch (error) {
+                            showToast('Failed to add item to cart. Please try again.');
+                        }
+                    }
+                });
+            });
+
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const icon = button.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        button.style.color = 'var(--danger)';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        button.style.color = '';
+                    }
+                });
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Load cart count
+            cartCount = await getCartCount();
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cartCount;
+            }
+
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    categoryCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    currentCategory = card.getAttribute('data-category');
+                    currentPage = 1;
+                    filterAndSortProducts();
+                    // Sync category select dropdown if exists
+                    const categoryFilter = document.getElementById('category-filter');
+                    if (categoryFilter) {
+                        categoryFilter.value = currentCategory;
+                    }
+                });
+            });
+
+            const categoryFilter = document.getElementById('category-filter');
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', () => {
+                    currentCategory = categoryFilter.value;
+                    currentPage = 1;
+                    filterAndSortProducts();
+                    // Sync category cards highlight
+                    const categoryCards = document.querySelectorAll('.category-card');
+                    categoryCards.forEach(c => c.classList.remove('active'));
+                    const activeCard = Array.from(categoryCards).find(c => c.getAttribute('data-category') === currentCategory);
+                    if (activeCard) activeCard.classList.add('active');
+                });
+            }
+
+            const sortFilter = document.getElementById('sort-filter');
+            if (sortFilter) {
+                sortFilter.addEventListener('change', () => {
+                    currentSort = sortFilter.value;
+                    currentPage = 1;
+                    filterAndSortProducts();
+                });
+            }
+
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+
+            if (searchButton) {
+                searchButton.addEventListener('click', () => {
+                    currentSearch = searchInput.value.trim();
+                    currentPage = 1;
+                    filterAndSortProducts();
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') {
+                        currentSearch = searchInput.value.trim();
+                        currentPage = 1;
+                        filterAndSortProducts();
+                    }
+                });
+            }
+
+            filterAndSortProducts();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Tips & Blog - Blue Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #004ccc;
+            --secondary: #003a9d;
+            --accent: #00c2ff;
+            --accent-light: #5cd7ff;
+            --light: #f5f9ff;
+            --dark: #0a1a35;
+            --gray: #6b7280;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 14px; /* Base font size for mobile */
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+            margin-right: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            white-space: nowrap;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 6rem 1rem 3rem;
+            background: linear-gradient(to bottom, rgba(0, 60, 157, 0.8), rgba(0, 102, 255, 0.7)), url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=40') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .page-header p {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            padding: 3rem 1rem;
+            background: white;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding: 1.5rem 0.8rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-card.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+        }
+        
+        .category-card.active .category-title {
+            color: white;
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .category-card.active .category-icon {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .category-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        /* Blog Section */
+        .blog-section {
+            padding: 3rem 1rem;
+            background-color: #f5f5f5;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem;
+            width: 100%;
+        }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .blog-card.hidden {
+            display: none;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+        
+        .blog-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .blog-info {
+            padding: 1.2rem;
+        }
+        
+        .blog-category {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            font-weight: 600;
+            height: auto;
+            overflow: hidden;
+        }
+        
+        .blog-excerpt {
+            color: var(--gray);
+            margin-bottom: 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        .blog-full-content {
+            display: none;
+            padding: 0 1.2rem 1.2rem 1.2rem;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .blog-full-content h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-full-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .blog-date {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .blog-read-time {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .blog-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .read-more {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            flex-grow: 1;
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .read-more:hover {
+            background: var(--primary-dark);
+        }
+        
+        .share {
+            background: #f8f9fa;
+            color: var(--dark);
+            border: 1px solid #ddd;
+            padding: 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        
+        .share:hover {
+            background: #e9ecef;
+            color: var(--primary);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 0.3rem;
+        }
+        
+        .pagination button {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .pagination button:hover:not(.active) {
+            background: #f8f9fa;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1rem 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 194, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Share Modal Styles */
+        .share-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .share-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .share-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .share-modal.show .share-modal-content {
+            transform: scale(1);
+        }
+
+        .share-modal h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .share-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .share-links a {
+            color: white;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .share-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .share-links a.facebook { background-color: #3b5998; }
+        .share-links a.twitter { background-color: #1da1f2; }
+        .share-links a.whatsapp { background-color: #25d366; }
+        .share-links a.linkedin { background-color: #0077b5; }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            color: var(--dark);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            
+            .page-header {
+                padding: 7rem 1.5rem 4rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .categories-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .blog-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .filter-bar {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .search-box {
+                width: auto;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            footer {
+                padding: 4rem 1.5rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            header {
+                padding: 0.5rem 2rem;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .page-header {
+                padding: 8rem 2rem 5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .categories-section {
+                padding: 5rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+            }
+            
+            .blog-section {
+                padding: 5rem 2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            footer {
+                padding: 5rem 2rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                margin-left: 1rem;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+            
+            .nav-links.active a {
+                padding: 0.8rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="logo">
+            <img src="http://bt-images-045854052038.s3-website-us-east-1.amazonaws.com/logo-b.png" alt="Blue Technology Logo" class="logo-icon">
+        </div>
+        
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html" class="active">Tips/Blog</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <button class="cta-button" onclick="window.location.href='cart.html'">Cart</button>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Tech Tips & Blog</h1>
+        <p>Expert advice to help you get the most out of your devices</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="section-title">Browse Categories</h2>
+        
+        <div class="categories-grid">
+            <div class="category-card" data-category="all">
+                <div class="category-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="category-title">All Tips</h3>
+            </div>
+            
+            <div class="category-card" data-category="battery">
+                <div class="category-icon">
+                    <i class="fas fa-battery-full"></i>
+                </div>
+                <h3 class="category-title">Battery Care</h3>
+            </div>
+            
+            <div class="category-card" data-category="maintenance">
+                <div class="category-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3 class="category-title">Maintenance</h3>
+            </div>
+            
+            <div class="category-card" data-category="security">
+                <div class="category-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="category-title">Security</h3>
+            </div>
+            
+            <div class="category-card" data-category="performance">
+                <div class="category-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3 class="category-title">Performance</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <h2 class="section-title">Latest Tech Tips</h2>
+            
+            <div class="filter-bar">
+                <div class="filter-options">
+                    <select class="filter-select" id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="battery">Battery Care</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="security">Security</option>
+                        <option value="performance">Performance</option>
+                        <option value="storage">Storage</option>
+                        <option value="troubleshooting">Troubleshooting</option>
+                        <option value="gadgets">Gadgets</option>
+                    </select>
+                    
+                    <select class="filter-select" id="sort-filter">
+                        <option value="latest">Latest First</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="Search tips..." id="search-input">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="blog-grid">
+                <!-- Tip 1 -->
+                <div class="blog-card" data-categories="battery">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1616077168079-7e09a677fb2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Extend Phone Battery Life" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Battery Care</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">10 Ways to Extend Your Phone Battery Life</h3>
+                        <p class="blog-excerpt">Learn simple tricks to make your phone battery last longer throughout the day and extend its overall lifespan.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Reduce Screen Brightness</h4>
+                            <p>The screen is one of the biggest power consumers. Lowering your brightness, or enabling auto-brightness, can significantly save power.</p>
+                            <h4>2. Disable Unused Features</h4>
+                            <p>Turn off Wi-Fi, Bluetooth, GPS, and cellular data when you don't need them. Your phone constantly scans for these connections, draining the battery.</p>
+                            <h4>3. Use Dark Mode</h4>
+                            <p>On devices with OLED screens, dark mode uses less power because black pixels are simply turned off. This can make a noticeable difference.</p>
+                            <h4>4. Close Unused Apps</h4>
+                            <p>Apps running in the background can continue to consume power. Regularly close apps you aren't actively using.</p>
+                            <h4>5. Optimize Location Services</h4>
+                            <p>Review which apps have access to your location and set them to "Only While Using" to prevent constant tracking.</p>
+                            <h4>6. Fetch Email Manually</h4>
+                            <p>Instead of having your phone constantly "push" new emails to you, change the settings to "Fetch" on a manual basis.</p>
+                            <h4>7. Avoid Extreme Temperatures</h4>
+                            <p>Heat and cold can both damage your battery. Avoid leaving your phone in direct sunlight or in a very cold environment.</p>
+                            <h4>8. Update Your Phone's OS</h4>
+                            <p>New operating system updates often include battery performance improvements and bug fixes.</p>
+                            <h4>9. Use Battery Saver Mode</h4>
+                            <p>When your battery is low, enable this mode to automatically restrict background activity and visual effects.</p>
+                            <h4>10. Keep Notifications to a Minimum</h4>
+                            <p>Each notification lights up your screen and makes a sound. Turning off unnecessary notifications can help save battery.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> May 15, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 5 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 2 -->
+                <div class="blog-card" data-categories="maintenance">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1544006659-f0b21884ce1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Laptop Cleaning" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Maintenance</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">How to Properly Clean Your Laptop</h3>
+                        <p class="blog-excerpt">Step-by-step guide to safely clean your laptop screen, keyboard, and vents without causing damage.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Power Down Your Laptop</h4>
+                            <p>Before you begin, turn off your laptop and unplug it from the power source. This is a critical safety step to prevent electrical damage.</p>
+                            <h4>2. Clean the Keyboard</h4>
+                            <p>Use a can of compressed air to blow out dust and debris from between the keys. Hold the can upright to prevent liquid propellant from spraying onto the keyboard. For a deeper clean, use a microfiber cloth dampened with isopropyl alcohol to wipe the keycaps.</p>
+                            <h4>3. Wipe the Screen</h4>
+                            <p>Use a soft, lint-free microfiber cloth specifically designed for electronics. You can dampen the cloth slightly with a cleaning solution made for screens (never use harsh chemicals like window cleaner). Gently wipe the screen in one direction, then the other, to remove smudges and fingerprints.</p>
+                            <h4>4. Clean the Vents and Ports</h4>
+                            <p>Use compressed air to carefully blow out dust from the air vents on the side or back of your laptop. This helps prevent overheating. You can also use a small, soft brush to clean any dirt from the USB or other ports.</p>
+                            <h4>5. Disinfect the Exterior</h4>
+                            <p>For the casing and touchpad, you can use a clean microfiber cloth with a small amount of isopropyl alcohol to disinfect and remove any grime.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> May 10, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 4 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 3 -->
+                <div class="blog-card" data-categories="security">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1563013541-7d34d11ba0e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Phone Security" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Security</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">Essential Security Settings for Your Smartphone</h3>
+                        <p class="blog-excerpt">Protect your personal data with these must-have security settings for both iOS and Android devices.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Set a Strong Password or Biometric Lock</h4>
+                            <p>The first line of defense is a strong lock screen. Use a complex passcode (more than 4 digits), or better yet, enable fingerprint or facial recognition for quick and secure access.</p>
+                            <h4>2. Enable Two-Factor Authentication (2FA)</h4>
+                            <p>Whenever possible, enable 2FA for your key accounts (email, social media, banking). This adds a second layer of security, requiring a code from your phone or an authenticator app in addition to your password.</p>
+                            <h4>3. Manage App Permissions</h4>
+                            <p>Regularly review the permissions you have granted to apps. Does a flashlight app really need access to your camera and contacts? Revoke any permissions that seem unnecessary or suspicious.</p>
+                            <h4>4. Keep Your OS Updated</h4>
+                            <p>Operating system updates often include critical security patches. Make sure you install them as soon as they become available to protect against new threats.</p>
+                            <h4>5. Be Wary of Public Wi-Fi</h4>
+                            <p>Public Wi-Fi networks are often unsecured and can be exploited by hackers. Avoid logging into sensitive accounts or making online purchases while connected to public Wi-Fi. A VPN is highly recommended for added security.</p>
+                            <h4>6. Install a Reputable Security App</h4>
+                            <p>For Android users, a good antivirus or security app can help detect and block malware. iOS devices have built-in security, but an app can still be useful for things like managing passwords or a VPN.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> May 5, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 7 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 4 -->
+                <div class="blog-card" data-categories="performance">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1603481546238-487240415921?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Laptop Speed" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Performance</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">Speed Up Your Slow Laptop in 5 Easy Steps</h3>
+                        <p class="blog-excerpt">Is your laptop running slow? Try these simple fixes to improve performance without spending money.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Clean Up Your Startup Programs</h4>
+                            <p>Many applications automatically launch when you boot your laptop, slowing down the startup process. Go to your Task Manager (Windows) or System Preferences (Mac) and disable any unnecessary programs from starting automatically.</p>
+                            <h4>2. Free Up Disk Space</h4>
+                            <p>A full hard drive can significantly slow down your computer. Delete old files, uninstall unused applications, and empty your recycle bin to free up space. Consider using a disk cleanup tool to remove temporary files.</p>
+                            <h4>3. Close Unnecessary Browser Tabs</h4>
+                            <p>Browser tabs are a major drain on your system's RAM. Close any tabs you're not actively using. This is a simple but highly effective way to improve performance.</p>
+                            <h4>4. Run a Malware Scan</h4>
+                            <p>Viruses and malware can consume system resources and slow down your computer. Use a reputable antivirus program to scan your system and remove any threats.</p>
+                            <h4>5. Update Your Drivers</h4>
+                            <p>Outdated drivers can sometimes cause performance issues. Check for updates for your graphics card, network adapter, and other components to ensure they are running at optimal efficiency.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> April 28, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 6 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 5 -->
+                <div class="blog-card" data-categories="storage">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Phone Storage" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Storage</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">How to Free Up Storage Space on Your Phone</h3>
+                        <p class="blog-excerpt">Running out of storage? Here are effective ways to clear space without losing important data.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Delete Unused Apps</h4>
+                            <p>Start by identifying and deleting apps you no longer use. On both iOS and Android, you can see how much space each app occupies. Remove the ones that are taking up a lot of space unnecessarily.</p>
+                            <h4>2. Clear App Cache and Data</h4>
+                            <p>Apps like social media, browsers, and streaming services can accumulate a large amount of cache data. You can clear this from your phone's settings to free up a significant amount of space without affecting the app's core functionality.</p>
+                            <h4>3. Move Photos and Videos to the Cloud</h4>
+                            <p>Photos and videos are the biggest storage consumers for most people. Use cloud services like Google Photos, iCloud, or Dropbox to back them up and then delete them from your device.</p>
+                            <h4>4. Delete Old Downloads and Files</h4>
+                            <p>Check your downloads folder and file manager for old documents, music, or other files you don't need anymore. These can add up quickly.</p>
+                            <h4>5. Review Your Messages</h4>
+                            <p>Old message threads with attachments (photos, videos, and GIFs) can take up a surprising amount of space. Delete old conversations you don't need to save.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> April 22, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 5 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 6 -->
+                <div class="blog-card" data-categories="troubleshooting">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Laptop Overheating" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Troubleshooting</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">Fixing Laptop Overheating Issues</h3>
+                        <p class="blog-excerpt">Is your laptop overheating? Learn the common causes and how to prevent damage from excessive heat.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Clean the Fans and Vents</h4>
+                            <p>Dust and debris are the most common culprits. Use a can of compressed air to carefully blow out the vents and fan blades to improve airflow.</p>
+                            <h4>2. Use Your Laptop on a Hard, Flat Surface</h4>
+                            <p>Avoid using your laptop on soft surfaces like a bed, blanket, or your lap. These surfaces can block the air vents and cause a build-up of heat.</p>
+                            <h4>3. Close Resource-Intensive Applications</h4>
+                            <p>If you're running multiple demanding programs or too many browser tabs, your CPU will have to work harder, generating more heat. Close any unnecessary applications.</p>
+                            <h4>4. Invest in a Cooling Pad</h4>
+                            <p>A cooling pad is a great accessory for laptops that frequently overheat. They are typically equipped with fans that blow cool air onto the bottom of the laptop, helping to dissipate heat.</p>
+                            <h4>5. Check for Malware</h4>
+                            <p>Some malware can run in the background, consuming CPU cycles and causing your laptop to overheat. Run a full system scan with a reliable antivirus program.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> April 15, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 8 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 7 -->
+                <div class="blog-card" data-categories="maintenance">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1582234036066-e3d6411516f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Phone Maintenance" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Maintenance</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">Simple Maintenance Tips to Keep Your Phone Fast</h3>
+                        <p class="blog-excerpt">Regular upkeep is key to preventing your smartphone from slowing down over time. These tips can help.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Reboot Your Device Regularly</h4>
+                            <p>A simple restart can clear out temporary files and refresh your phone's memory, improving overall performance and responsiveness. It's a quick fix that often works wonders.</p>
+                            <h4>2. Use a Reliable App Cleaner</h4>
+                            <p>Both iOS and Android have built-in features to manage storage, but third-party app cleaners can help identify and clear junk files, duplicate photos, and other unnecessary data.</p>
+                            <h4>3. Update Your Apps</h4>
+                            <p>Developers often release app updates with performance improvements and bug fixes. Keeping your apps updated ensures you have the most optimized version available.</p>
+                            <h4>4. Reduce Visual Effects</h4>
+                            <p>If your phone is older, reducing screen transitions and animations can make it feel much snappier. This is an option in both iOS and Android accessibility settings.</p>
+                            <h4>5. Avoid Too Many Widgets</h4>
+                            <p>While widgets can be useful, too many on your home screen can consume resources and slow down your phone's interface.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> April 8, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 4 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tip 8 -->
+                <div class="blog-card" data-categories="security">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1579783928622-7a7d45731779?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Data Backup" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Security</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">The Importance of Backing Up Your Data</h3>
+                        <p class="blog-excerpt">Learn why backing up your data is crucial and how to set up an easy, automatic backup routine.</p>
+                        <div class="blog-full-content">
+                            <h4>Why Data Backup is Essential</h4>
+                            <p>Data loss can happen to anyone, at any time, due to hardware failure, theft, or a simple mistake. Having a backup ensures that your important photos, documents, and files are safe and can be restored quickly. It provides peace of mind and is a fundamental part of digital security.</p>
+                            <h4>How to Set Up a Backup Routine</h4>
+                            <p>Start by identifying your most important files. Then, choose a backup method that suits your needs. Cloud storage services like Google Drive, Dropbox, and Microsoft OneDrive are popular and often offer free storage tiers. You can also use an external hard drive for a local backup. Most modern operating systems have built-in backup tools that can be configured to run automatically.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> March 29, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 6 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 9 -->
+                <div class="blog-card" data-categories="security">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1616462719602-0e3f16960d7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Wi-Fi Security" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Security</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">Securing Your Home Wi-Fi Network</h3>
+                        <p class="blog-excerpt">Protect your personal information from hackers by following these essential steps to secure your home network.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Change the Default Router Password</h4>
+                            <p>The first thing you should do is change the default username and password for your router. Default credentials are well-known and can be easily exploited by attackers.</p>
+                            <h4>2. Use a Strong Encryption Protocol</h4>
+                            <p>Make sure your network uses WPA2 or WPA3 encryption. These are the most secure standards available and will prevent unauthorized access to your network.</p>
+                            <h4>3. Create a Guest Network</h4>
+                            <p>If you have visitors who need to use your Wi-Fi, set up a separate guest network. This keeps them off your main network and prevents them from accessing your connected devices.</p>
+                            <h4>4. Regularly Update Your Router's Firmware</h4>
+                            <p>Firmware updates often contain critical security patches. Check your router's manual or the manufacturer's website for instructions on how to update it.</p>
+                            <h4>5. Disable WPS (Wi-Fi Protected Setup)</h4>
+                            <p>WPS is convenient but can be vulnerable to brute-force attacks. It's best to disable it and use a strong password instead.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> March 20, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 7 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tip 10 -->
+                <div class="blog-card" data-categories="gadgets">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1582233470914-617e4401c4c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70" alt="Tech Gadgets" width="400" height="300" loading="lazy">
+                        <div class="blog-badge">Gadgets</div>
+                    </div>
+                    <div class="blog-info">
+                        <h3 class="blog-title">Must-Have Tech Gadgets for a Smarter Home</h3>
+                        <p class="blog-excerpt">Take your home into the future with these innovative and useful gadgets that simplify daily life.</p>
+                        <div class="blog-full-content">
+                            <h4>1. Smart Speakers</h4>
+                            <p>A smart speaker like an Amazon Echo or Google Nest is the perfect hub for your smart home. You can use it to control lights, thermostats, and other devices with just your voice.</p>
+                            <h4>2. Smart Plugs</h4>
+                            <p>Smart plugs are an inexpensive way to turn any regular appliance into a smart one. Plug in a lamp or coffee maker, and you can control it remotely using your phone or a smart speaker.</p>
+                            <h4>3. Smart Thermostats</h4>
+                            <p>A smart thermostat can help you save money on energy bills by learning your schedule and automatically adjusting the temperature. They also allow you to control your home's climate from anywhere.</p>
+                            <h4>4. Smart Doorbells</h4>
+                            <p>A smart doorbell with a camera allows you to see who is at your door, even when you're not home. You can talk to visitors, receive package delivery alerts, and monitor your front porch for added security.</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <i class="far fa-calendar"></i> March 12, 2025
+                            </div>
+                            <div class="blog-read-time">
+                                <i class="far fa-clock"></i> 5 min read
+                            </div>
+                        </div>
+                        <div class="blog-actions">
+                            <button class="read-more">Read More</button>
+                            <button class="share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button data-page-number="1" class="active">1</button>
+                <button data-page-number="2">2</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Blue Technology</h3>
+                <p>Your trusted partner for all technology solutions in Nairobi. We specialize in sales, marketing, and professional repair services.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/bluetechnology.co.ke"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/BLUETECHNOLOG58"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/bluetechnology58"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@BlueTechnology58"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/254707454182"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="products">Products</a></li>
+                    <li><a href="blog.html">Tips/Blog</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <a href="https://maps.app.goo.gl/242PM1ZStkDsmXBM7" target="_blank">KM behind Kenyatta University, Nairobi</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="https://api.whatsapp.com/send/?phone=254707454182&text&type=phone_number&app_absent=0">0707 454 182</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:bluetechnology58@gmail.com">bluetechnology58@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>Mon-Sat: 8:00 AM - 6:00 PM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 Blue Technology. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Social Media Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Share this tip!</h3>
+            <div class="share-links">
+                <a href="#" class="facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="twitter" title="Share on X"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Category filtering functionality
+        const categoryCards = document.querySelectorAll('.category-card');
+        const blogCards = document.querySelectorAll('.blog-card');
+        const categoryFilter = document.getElementById('category-filter');
+        
+        function filterByCategory(category) {
+            blogCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-categories').includes(category)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Update active state for category cards
+            categoryCards.forEach(card => {
+                if (card.getAttribute('data-category') === category) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+            
+            // Update dropdown to match
+            categoryFilter.value = category;
+        }
+        
+        // Add event listeners to category cards
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.getAttribute('data-category');
+                filterByCategory(category);
+            });
+        });
+        
+        // Add event listener to category filter dropdown
+        categoryFilter.addEventListener('change', () => {
+            filterByCategory(categoryFilter.value);
+        });
+        
+        // Share functionality
+        const shareButtons = document.querySelectorAll('.share');
+        const shareModal = document.getElementById('shareModal');
+        const closeBtn = shareModal.querySelector('.close-btn');
+
+        shareButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const shareUrl = window.location.href;
+                const shareTitle = button.closest('.blog-card').querySelector('.blog-title').textContent.trim();
+                const shareText = "Check out this great tech tip from Blue Technology!";
+
+                // Set up the dynamic sharing links
+                document.querySelector('.share-links .facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+                document.querySelector('.share-links .twitter').href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText + ' ' + shareTitle)}`;
+                document.querySelector('.share-links .whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+                document.querySelector('.share-links .linkedin').href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareTitle)}`;
+
+                shareModal.classList.add('show');
+            });
+        });
+
+        // Close the modal when the close button is clicked
+        closeBtn.addEventListener('click', () => {
+            shareModal.classList.remove('show');
+        });
+
+        // Close the modal if the user clicks outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target === shareModal) {
+                shareModal.classList.remove('show');
+            }
+        });
+
+        // Read more functionality
+        const readMoreButtons = document.querySelectorAll('.read-more');
+
+        readMoreButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const card = button.closest('.blog-card');
+                const excerpt = card.querySelector('.blog-excerpt');
+                const fullContent = card.querySelector('.blog-full-content');
+                
+                if (fullContent.style.display === 'block') {
+                    // Collapse the content
+                    fullContent.style.display = 'none';
+                    excerpt.style.display = 'block';
+                    button.textContent = 'Read More';
+                } else {
+                    // Expand the content
+                    excerpt.style.display = 'none';
+                    fullContent.style.display = 'block';
+                    button.textContent = 'Read Less';
+                }
+            });
+        });
+
+        // Pagination functionality
+        const paginationButtons = document.querySelectorAll('.pagination button');
+        const itemsPerPage = 6;
+
+        function showPage(pageNumber) {
+            blogCards.forEach((card, index) => {
+                if (index >= (pageNumber - 1) * itemsPerPage && index < pageNumber * itemsPerPage) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            paginationButtons.forEach(btn => {
+                if (parseInt(btn.getAttribute('data-page-number')) === pageNumber) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Initial page load
+        showPage(1);
+        
+        paginationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pageNumber = parseInt(button.getAttribute('data-page-number'));
+                showPage(pageNumber);
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        
+        searchInput.addEventListener('keyup', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

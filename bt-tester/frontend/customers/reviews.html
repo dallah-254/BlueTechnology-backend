@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - Blue Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #004ccc;
+            --secondary: #003a9d;
+            --accent: #00c2ff;
+            --accent-light: #5cd7ff;
+            --light: #f5f9ff;
+            --dark: #0a1a35;
+            --gray: #6b7280;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 14px; /* Base font size for mobile */
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+            margin-right: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            white-space: nowrap;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 6rem 1rem 3rem;
+            background: linear-gradient(to bottom, rgba(0, 60, 157, 0.8), rgba(0, 102, 255, 0.7)), url('https://images.unsplash.com/photo-1563013541-7d34d11ba0e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=40') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .page-header p {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Reviews Section */
+        .reviews-section {
+            padding: 3rem 1rem;
+            background-color: #f5f5f5;
+        }
+        
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 1.5rem;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .reviewer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .reviewer-info {
+            flex: 1;
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+        
+        .review-date {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .review-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .review-rating i {
+            color: var(--warning);
+            font-size: 0.9rem;
+            margin-right: 0.2rem;
+        }
+        
+        .review-content {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            max-height: 100px;
+            transition: max-height 0.5s ease-in-out;
+        }
+        
+        .review-content.expanded {
+            max-height: 1000px; /* A large value to ensure content fits */
+        }
+        
+        .review-service {
+            display: inline-block;
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .review-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+        
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        /* New: Review Form Section */
+        .review-form-section {
+            padding: 3rem 1rem;
+            background: #f0f4ff;
+        }
+        
+        .review-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .star-rating i {
+            color: #ddd;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .star-rating i.selected {
+            color: var(--warning);
+        }
+        
+        .post-review-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .post-review-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-text {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .cta-button-primary {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .cta-button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .cta-button-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1rem 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 194, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            
+            .page-header {
+                padding: 7rem 1.5rem 4rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .stats-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .reviews-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .cta-button-primary,
+            .cta-button-secondary {
+                width: auto;
+            }
+            
+            footer {
+                padding: 4rem 1.5rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            header {
+                padding: 0.5rem 2rem;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .page-header {
+                padding: 8rem 2rem 5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .stats-section {
+                padding: 5rem 2rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .reviews-section {
+                padding: 5rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            .cta-section {
+                padding: 5rem 2rem;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+            
+            footer {
+                padding: 5rem 2rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+            
+            .nav-links.active a {
+                padding: 0.8rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="http://bt-images-045854052038.s3-website-us-east-1.amazonaws.com/logo-b.png" alt="Blue Technology Logo" class="logo-icon">
+        </div>
+        
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html">Tips/Blog</a></li>
+                <li><a href="reviews.html" class="active">Review</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <button class="cta-button" onclick="window.location.href='contact.html'">Contact Us</button>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1>Customer Reviews</h1>
+        <p>Hear what our satisfied customers have to say about our services</p>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card animated">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years in Business</div>
+            </div>
+            <div class="stat-card animated">
+                <div class="stat-number">2000+</div>
+                <div class="stat-label">Laptops Repaired</div>
+            </div>
+            <div class="stat-card animated">
+                <div class="stat-number">3000+</div>
+                <div class="stat-label">Phones Repaired</div>
+            </div>
+            <div class="stat-card animated">
+                <div class="stat-number">7000+</div>
+                <div class="stat-label">Satisfied Customers</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="review-form-section">
+        <h2 class="section-title">Leave a Review</h2>
+        <div class="review-form-container animated">
+            <form id="reviewForm" class="review-form">
+                <div class="form-group">
+                    <label for="reviewerName">Your Name / Email</label>
+                    <input type="text" id="reviewerName" name="reviewerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Rating</label>
+                    <div id="starRating" class="star-rating">
+                        <i class="fas fa-star" data-rating="1"></i>
+                        <i class="fas fa-star" data-rating="2"></i>
+                        <i class="fas fa-star" data-rating="3"></i>
+                        <i class="fas fa-star" data-rating="4"></i>
+                        <i class="fas fa-star" data-rating="5"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reviewMessage">Your Review</label>
+                    <textarea id="reviewMessage" name="reviewMessage" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="post-review-btn">Post Review</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="reviews-container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            
+            <div id="reviewsGrid" class="reviews-grid">
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Mwangi">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">John Mwangi</div>
+                            <div class="review-date">March 15, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>Blue Technology repaired my laptop screen in record time. The service was professional, and the price was very reasonable. My laptop looks brand new now. Highly recommend their services! They were also very helpful in explaining the issue and what they did to fix it, which I really appreciated. The communication was excellent from start to finish. I will definitely be a repeat customer for any future tech needs.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Laptop Screen Replacement</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Akinyi">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Sarah Akinyi</div>
+                            <div class="review-date">February 28, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>I had water damage on my phone and thought it was beyond repair. Blue Technology not only fixed it but also explained what needed to be done. Great customer service and fair pricing. The phone works perfectly now, and I'm so glad I chose them instead of buying a new one. The entire process was seamless and stress-free.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Water Damage Repair</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Ochieng">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">David Ochieng</div>
+                            <div class="review-date">February 10, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="4.5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>Bought a new smartphone from Blue Technology. They gave me a good deal and even threw in a free screen protector. The after-sales support has been excellent too. I had a few questions about the phone's features, and they were very patient and helpful. I would recommend them for their great products and reliable service.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Phone Sales</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/67.jpg" alt="Grace Wanjiku">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Grace Wanjiku</div>
+                            <div class="review-date">January 25, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>My laptop had a charging issue that other repair shops couldn't fix. Blue Technology diagnosed the problem correctly and repaired it at a reasonable cost. Very knowledgeable technicians! I was so relieved to have my laptop working again. They are true experts in their field and provided a fantastic service.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Charging System Repair</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Peter Kamau">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Peter Kamau</div>
+                            <div class="review-date">January 12, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>I needed software installation on my new laptop. Blue Technology did it quickly and professionally. They also gave me some useful tips on maintaining my device. Great service! They went above and beyond my expectations and provided excellent value for money.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Software Installation</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Mary Auma">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Mary Auma</div>
+                            <div class="review-date">December 30, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>My phone's battery was draining too fast. Blue Technology replaced it, and now my phone lasts all day again. Quick service and friendly staff. Will definitely return for future repairs. The whole process was transparent, and I was kept informed about the progress of the repair.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Battery Replacement</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="James Okoth">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">James Okoth</div>
+                            <div class="review-date">November 22, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>Had my desktop computer's hard drive replaced here. The technician was very efficient and professional. My computer is now faster than ever before. I'm very satisfied with the work and the excellent service. I will recommend Blue Technology to my friends and colleagues for sure.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Hard Drive Replacement</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Faith Chebet">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Faith Chebet</div>
+                            <div class="review-date">October 10, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>Excellent service from start to finish. They fixed my phone's cracked screen in under an hour. The quality of the repair is top-notch, and the new screen looks flawless. I'm incredibly happy with the result. They are true professionals who care about their customers.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Screen Repair</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Alex Gachanja">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Alex Gachanja</div>
+                            <div class="review-date">September 5, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="4.5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>I had a complex data recovery issue, and Blue Technology handled it with expertise. They managed to recover all my important files. I'm very grateful for their skill and dedication. They were transparent about the process and kept me updated every step of the way.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Data Recovery</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/10.jpg" alt="Monica Wairimu">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Monica Wairimu</div>
+                            <div class="review-date">August 18, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>The team at Blue Technology is amazing! They helped me choose the perfect laptop for my needs and budget. Their advice was honest and not pushy at all. The entire buying experience was a pleasure. I feel confident in my purchase and the support I will get from them in the future.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Laptop Sales</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Sammy Kinyanjui">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Sammy Kinyanjui</div>
+                            <div class="review-date">July 7, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>I had a minor software glitch on my phone. They fixed it for free on the spot. I was impressed by their honesty and willingness to help. This kind of integrity is hard to find in the industry. I will be recommending their services to everyone I know. Thanks for the quick and effective help!</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Software Troubleshooting</span>
+                </div>
+                
+                <div class="review-card animated">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Esther Njeri">
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Esther Njeri</div>
+                            <div class="review-date">June 25, 2024</div>
+                        </div>
+                    </div>
+                    <div class="review-rating" data-rating="5">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="review-content">
+                        <p>My phone's charging port was damaged. Blue Technology repaired it perfectly. The price was fair, and the service was very fast. I'm completely satisfied with the repair and will be coming back for any future issues. The technician was friendly and answered all my questions patiently.</p>
+                        <button class="read-more-btn">Show More</button>
+                    </div>
+                    <span class="review-service">Charging Port Repair</span>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">Ready to Experience Our Services?</h2>
+            <p class="cta-text">Join our growing list of satisfied customers. Get in touch with us today for all your technology needs.</p>
+            <div class="cta-buttons">
+                <button class="cta-button-primary" onclick="window.location.href='contact.html'">Contact Us Now</button>
+                <button class="cta-button-secondary" onclick="window.location.href='services.html'">View Our Services</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Blue Technology</h3>
+                <p>Your trusted partner for all technology solutions in Nairobi. We specialize in sales, marketing, and professional repair services.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/bluetechnology.co.ke"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/BLUETECHNOLOG58"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/bluetechnology58"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@BlueTechnology58"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/254707454182"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="blog.html">Tips/Blog</a></li>
+                    <li><a href="reviews.html" class="active">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <a href="https://maps.app.goo.gl/242PM1ZStkDsmXBM7" target="_blank">KM behind Kenyatta University, Nairobi</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="https://api.whatsapp.com/send/?phone=254707454182&text&type=phone_number&app_absent=0">0707 454 182</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:bluetechnology58@gmail.com">bluetechnology58@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>Mon-Sat: 8:00 AM - 6:00 PM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 Blue Technology. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container') && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+            }
+        });
+        
+        // CTA buttons functionality
+        const ctaButtons = document.querySelectorAll('.cta-button-primary, .cta-button-secondary');
+        
+        ctaButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                window.location.href = 'services.html';
+            });
+        });
+        
+        // Scroll animations
+        const animatedElements = document.querySelectorAll('.animated');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        animatedElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Parallax effect for page header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const pageHeader = document.querySelector('.page-header');
+            pageHeader.style.backgroundPositionY = (scrolled * 0.5) + 'px';
+        });
+
+        // Review Form Star Rating functionality
+        const starRating = document.getElementById('starRating');
+        let selectedRating = 0;
+
+        starRating.addEventListener('click', (e) => {
+            const clickedStar = e.target.closest('i');
+            if (clickedStar) {
+                selectedRating = parseInt(clickedStar.dataset.rating);
+                updateStarRating(selectedRating);
+            }
+        });
+
+        function updateStarRating(rating) {
+            const stars = starRating.querySelectorAll('i');
+            stars.forEach(star => {
+                if (parseInt(star.dataset.rating) <= rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
+        
+        // Handle "Post Review" submission
+        const reviewForm = document.getElementById('reviewForm');
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const reviewerName = document.getElementById('reviewerName').value;
+            const reviewMessage = document.getElementById('reviewMessage').value;
+            
+            if (reviewerName && reviewMessage && selectedRating > 0) {
+                const today = new Date();
+                const dateString = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                
+                const newReviewCard = `
+                    <div class="review-card animated animate-in">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/99.jpg" alt="User Avatar">
+                            </div>
+                            <div class="reviewer-info">
+                                <div class="reviewer-name">${reviewerName}</div>
+                                <div class="review-date">${dateString}</div>
+                            </div>
+                        </div>
+                        <div class="review-rating" data-rating="${selectedRating}">
+                            ${getStarHtml(selectedRating)}
+                        </div>
+                        <div class="review-content">
+                            <p>${reviewMessage}</p>
+                            <button class="read-more-btn">Show More</button>
+                        </div>
+                        <span class="review-service">New Review</span>
+                    </div>
+                `;
+                
+                document.getElementById('reviewsGrid').insertAdjacentHTML('afterbegin', newReviewCard);
+                
+                // Reset the form
+                reviewForm.reset();
+                selectedRating = 0;
+                updateStarRating(0);
+                
+                // Re-attach event listeners to new button
+                attachReadMoreListeners();
+                
+                alert('Thank you for your review!');
+            } else {
+                alert('Please fill out all fields and select a rating.');
+            }
+        });
+        
+        function getStarHtml(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 === rating) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        // Show more/Show less functionality for reviews
+        function attachReadMoreListeners() {
+            const readMoreButtons = document.querySelectorAll('.read-more-btn');
+            readMoreButtons.forEach(button => {
+                button.removeEventListener('click', toggleReviewContent); // Prevent double-listening
+                button.addEventListener('click', toggleReviewContent);
+            });
+        }
+
+        function toggleReviewContent() {
+            const content = this.previousElementSibling;
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                this.textContent = 'Show More';
+            } else {
+                content.classList.add('expanded');
+                this.textContent = 'Show Less';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial setup for existing reviews
+            document.querySelectorAll('.review-card').forEach(card => {
+                const content = card.querySelector('.review-content p');
+                const button = card.querySelector('.read-more-btn');
+                // Only show "Show More" if content overflows
+                if (content.scrollHeight > content.clientHeight) {
+                     button.style.display = 'block';
+                } else {
+                     button.style.display = 'none';
+                }
+            });
+            attachReadMoreListeners();
+        });
+    </script>
+</body>
+</html>

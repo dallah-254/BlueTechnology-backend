@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Technology - Our Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #004ccc;
+            --secondary: #003a9d;
+            --accent: #00c2ff;
+            --accent-light: #5cd7ff;
+            --light: #f5f9ff;
+            --dark: #0a1a35;
+            --gray: #6b7280;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 14px; /* Base font size for mobile */
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+            margin-right: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.3rem 0;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after,
+        .nav-links a.active:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            white-space: nowrap;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 1rem 3rem;
+            background: linear-gradient(to bottom, rgba(0, 60, 157, 0.8), rgba(0, 102, 255, 0.7)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .secondary-button:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 50px;
+            height: 50px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 30px;
+            height: 30px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 40%;
+            left: 75%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(4) {
+            width: 35px;
+            height: 35px;
+            top: 70%;
+            left: 15%;
+            animation-delay: 3s;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 3rem 1rem;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            bottom: 0;
+            left: 0;
+            transition: height 0.4s ease;
+            z-index: -1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-card:hover:before {
+            height: 100%;
+        }
+        
+        .service-card:hover .service-content {
+            color: white;
+        }
+        
+        .service-card:hover .service-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .service-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+            transition: color 0.4s ease;
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: -30px auto 1rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            transition: color 0.4s ease;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .service-card:hover .service-content h3 {
+            color: white;
+        }
+        
+        .service-content p {
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
+        .service-content ul {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+        
+        .service-content ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .service-content ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .service-card:hover .service-content ul li:before {
+            color: white;
+        }
+        
+        /* Service Categories */
+        .service-category {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .category-title:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Tabs Styling */
+        .tabs-container {
+            margin: 1.5rem 0;
+        }
+        
+        .tabs-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 0.7rem 1rem;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex: 1;
+            min-width: 120px;
+            justify-content: center;
+            height: 100px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .service-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-item-image {
+            height: 150px;
+            overflow: none;
+        }
+        
+        .service-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-item-details {
+            padding: 1.2rem;
+        }
+        
+        .service-item-details h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .service-price {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+        
+        .service-item-details p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .book-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        .book-btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 2rem auto 0;
+        }
+        
+        .process-step {
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+        
+        .process-step p {
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 3rem 1rem;
+            background: linear-gradient(to right, rgba(0, 60, 157, 0.9), rgba(0, 194, 255, 0.8)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1rem 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 1rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .contact-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 194, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+           100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .animated {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (min-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding: 7rem 1.5rem 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .services {
+                padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tab-content.active {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process {
+                padding: 4rem 1.5rem;
+            }
+            
+            .cta-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            footer {
+                padding: 4rem 1.5rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            header {
+                padding: 0.5rem 2rem;
+            }
+            
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding: 8rem 2rem 5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .services {
+                padding: 6rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            
+            .tab-content.active {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .process {
+                padding: 6rem 2rem;
+            }
+            
+            .process-steps {
+                flex-direction: row;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            
+            .process-step {
+                flex: 1;
+                min-width: 250px;
+                padding: 2rem;
+            }
+            
+            .process-step:not(:last-child):after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 60%;
+                width: 2px;
+                background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            }
+            
+            .cta-section {
+                padding: 6rem 2rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2.2rem;
+            }
+            
+            footer {
+                padding: 5rem 2rem 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+                margin-left: 1rem;
+            }
+            
+            .nav-container {
+                justify-content: flex-end;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                gap: 0.5rem;
+            }
+            
+            .nav-links.active a {
+                padding: 0.8rem;
+                font-size: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .tabs-header {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="logo">
+            <img src="http://bt-images-045854052038.s3-website-us-east-1.amazonaws.com/logo-b.png" alt="Blue Technology Logo" class="logo-icon">
+        </div>
+        
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="blog.html">Tips/Blog</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <button class="cta-button" onclick="window.location.href='cart.html'">Cart</button>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Our Professional Services</h1>
+            <p>At Blue Technology, we offer comprehensive repair and sales services for all your technology needs. With years of experience and thousands of satisfied customers, we're your trusted partner in Nairobi.</p>
+            <div class="hero-buttons">
+                <button class="cta-button" onclick="window.location.href='contact.html'">Contact Us Now</button>
+                <button class="secondary-button" onclick="window.location.href='services.html'">View Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2 class="section-title">Our Premium Services</h2>
+        
+        <!-- Phone Repair Services -->
+        <div class="service-category">
+            <h3 class="category-title">Phone Repair Services</h3>
+            
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="hardware-services">
+                        <i class="fas fa-tools"></i> Hardware Services
+                    </button>
+                    <button class="tab-btn" data-tab="software-services">
+                        <i class="fas fa-code"></i> Software Services
+                    </button><br>                
+                
+                <div class="tab-content active" id="hardware-services">
+                    <!-- Hardware Services -->
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/6076410/pexels-photo-6076410.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Oppo Screen Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Screen replacement (LCD, OLED, touch screen)</h4>
+                            <p>Professional screen replacement for all type of phones at an affordable prices.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/6855373/pexels-photo-6855373.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Xiaomi Battery Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Battery Replacement</h4>
+                            <p>Quality battery replacement for all type of smartphone devices devices.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Phone Motherboard Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Phone Motherboard Repair</h4>
+                            <p>Professional motherboard repair service for all phone models.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Phone Motherboard Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Power and volume button Repair</h4>
+                            <p>Professional button repair service for all phone models.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Charging Port Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Charging Port Replacement</h4>
+                            <p>Professional charging port replacement service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Charging Port Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Back cover/glass replacement</h4>
+                            <p>Professional Back cover/glass replacementt replacement service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Speaker Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Speaker Replacement</h4>
+                            <p>Quality speaker replacement for clear audio.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Camera Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Camera repair/replacement (front & rear)</h4>
+                            <p>Professional camera replacement for front and rear cameras.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Battery Connector Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Battery Connector Repair</h4>
+                            <p>Fix battery connection issues on your device.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Battery Connector Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Speaker/microphone and Vibrator repair</h4>
+                            <p>Fix Speaker/microphone and Vibrator on your device.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Volume Button Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Earphone jack repair</h4>
+                            <p>Fix Earphone jack repair issues on your device.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Power Button Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Water/liquid damage repair</h4>
+                            <p>Professional Water/liquid damage repair service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vibration Motor Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Vibration Motor Replacement</h4>
+                            <p>Fix vibration functionality on your device.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600" alt="SIM Tray Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>SIM Tray Replacement</h4>
+                            <p>Replace damaged or lost SIM trays.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="software-services">
+                    <!-- Software Services -->
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="iOS Update & Downgrade">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>iOS Update & Downgrade</h4>
+                            <p>Professional iOS update or downgrade service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Software Optimization">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Software Optimization</h4>
+                            <p>Optimize your device's software performance.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Virus & Malware Removal">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Virus & Malware Removal</h4>
+                            <p>Remove viruses and malware from your device.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Data Recovery Service">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Data Recovery Service</h4>
+                            <p>Recover lost or deleted data from your device.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Data Transfer Service">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Data Transfer Service</h4>
+                            <p>Transfer data between devices safely.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Network Unlocking">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Network Unlocking</h4>
+                            <p>Unlock your device for use with any network carrier.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                </div>
+        <!-- Laptop Repair Services -->
+        <div class="service-category">
+            <h3 class="category-title">Laptop Repair Services</h3>
+            
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="laptop-hardware">
+                        <i class="fas fa-laptop"></i> Hardware Services
+                    </button>
+                    <button class="tab-btn" data-tab="laptop-software">
+                        <i class="fas fa-code"></i> Software Services
+                    </button>
+
+                    <button class="tab-btn" data-tab="laptop-other">
+                        <i class="fas fa-tools"></i> Other Services
+                    </button>
+                </div>
+                
+                <div class="tab-content active" id="laptop-hardware">
+                    <!-- Laptop Hardware Services -->
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Motherboard Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Motherboard Repair</h4>
+                            <p>Professional motherboard repair service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Motherboard Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Screen replacement</h4>
+                            <p>Professional screen repair service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Charging Port Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Charging Port Replacement</h4>
+                            <p>Professional charging port replacement.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Keyboard Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Keyboard Replacement</h4>
+                            <p>Quality keyboard replacement service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Touchpad Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Touchpad Replacement</h4>
+                            <p>Professional touchpad replacement.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fan & Cooling System Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Fan & Cooling System Repair</h4>
+                            <p>Fix overheating issues with cooling system repair.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="DC Jack Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Casing Replacement</h4>
+                            <p>Professionally get your laptop casing replaced.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="DC Jack Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Battery Replacement</h4>
+                            <p>Professionally get your laptop battery replaced.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="DC Jack Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Touchscreen Repair and replacement</h4>
+                            <p>Professionally get your touch sensitive laptop screen repaired or replaced.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="DC Jack Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Backlight Repair</h4>
+                            <p>Professionally get your laptop keyboard backlight casing repaired.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="DC Jack Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>HDD/SDD conversion</h4>
+                            <p>Professionally get your laptop storage converted.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="DC Jack Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Bluetooth/Wifi adapter installation</h4>
+                            <p>Professionally get your laptops wifi/bluetooth adapter replaced.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="USB Port Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>USB Port Repair</h4>
+                            <p>Fix USB port connectivity issues.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="HDMI Port Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>HDMI Port Repair</h4>
+                            <p>Professional HDMI port repair service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Speaker Replacement">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Speaker Replacement</h4>
+                            <p>Quality laptop speaker replacement.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/38568/apple-imac-ipad-workplace-38568.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Webcam Repair">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Webcam Repair</h4>
+                            <p>Fix webcam issues on your laptop.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="laptop-software">
+                    <!-- Laptop Software Services -->
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Windows Installation">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Windows Installation</h4>
+                            <p>Professional Windows OS installation.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Windows Installation">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Ubuntu Installation</h4>
+                            <p>Professional Ubuntu OS installation.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="macOS Installation">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>macOS Installation</h4>
+                            <p>Professional macOS installation service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Linux Installation">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Linux Installation</h4>
+                            <p>Professional Linux OS installation.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Driver Installation & Update">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Driver Installation & Update</h4>
+                            <p>Professional driver installation and update service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Software Optimization">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>BIOS programming</h4>
+                            <p>Optimize your laptop's BIOS setup.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Virus & Malware Removal">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Virus & Malware Removal</h4>
+                            <p>Remove viruses and malware from your laptop.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Data Backup & Recovery">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Data Backup & Recovery</h4>
+                            <p>Professional data backup and recovery service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Data Transfer Service">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Data Transfer Service</h4>
+                            <p>Transfer data between devices safely.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Disk Cleanup & Defragmentation">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Disk Cleanup & Defragmentation</h4>
+                            <p>Optimize your laptop's storage performance.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Disk Cleanup & Defragmentation">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Visualization setup</h4>
+                            <p>Professionally get your laptops visuals enhanced..</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="BIOS/UEFI Configuration">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Legacy/UEFI Configuration</h4>
+                            <p>Professional BIOS/UEFI configuration service.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="laptop-other">
+                            
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/1269975/pexels-photo-1269975.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dual-Boot Configuration">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Dual-Boot Configuration</h4>
+                            <p>Set up dual-boot system on your laptop.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-item-image">
+                            <img src="https://images.pexels.com/photos/1269975/pexels-photo-1269975.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dual-Boot Configuration">
+                        </div>
+                        <div class="service-item-details">
+                            <h4>Laptop overheating</h4>
+                            <p>Fan cleaning and thermopaste replacement.</p>
+                            <button class="book-btn">Book Service</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        
+        <!-- Electronic Sales -->
+        <div class="service-category">
+            <h3 class="category-title">Electronic Sales</h3>
+            <div class="services-grid">
+                <div class="service-card animated">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rows of new smartphones for sale" loading="lazy">
+                    </div>
+                    <div class="service-icon">
+                        <i class="fas fa-mobile"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Smartphones & Tablets</h3>
+                        <p>Latest smartphones and tablets from top brands at competitive prices with warranty.</p>
+                        <ul>
+                            <li>Latest phone, laptop and tablet models available</li>
+                            <li>All available at the best market prices</li>
+                            <li>Official company device warranty</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card animated">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rows of new smartphones for sale" loading="lazy">
+                    </div>
+                    <div class="service-icon">
+                        <i class="fas fa-mobile"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Electronic accessories</h3>
+                        <p>Latest smartphones,Laptops and tablets accessories.</p>
+                        <ul>
+                            <li>Phone, laptop and tablet covers and protectors</li>
+                            <li>original batteries for phones, laptops and tablets</li>
+                            <li>Wireless charging for wireless charging devices</li>
+                            <li>Stylus pen replacements</li>
+                            <li>headphones, chargers, cables replacement</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card animated">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Customer testing a laptop in a store" loading="lazy">
+                    </div>
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Laptops & Computers</h3>
+                        <p>High-performance laptops and desktop computers for personal and business use.</p>
+                        <ul>
+                            <li>Gaming laptops</li>
+                            <li>Gaming console</li>
+                            <li>Gamepads, keyboards and gaming mouse</li>
+                            <li>Business notebooks</li>
+                            <li>Desktop computers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                
+                <div class="service-card animated">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Boxed headphones and electronics on a shelf" loading="lazy">
+                    </div>
+                    <div class="service-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Software & Licensing</h3>
+                        <p>Genuine software solutions and licensing for operating systems and productivity suites.</p>
+                        <ul>
+                            <li>Windows OS installation</li>
+                            <li>Microsoft Office suite</li>
+                            <li>Antivirus software</li>
+                        </ul>
+                    </div>
+                </div>
+
+                 <div class="service-card animated">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Boxed headphones and electronics on a shelf" loading="lazy">
+                    </div>
+                    <div class="service-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>gaming consoles and accessories</h3>
+                        <p>Genuine software solutions and licensing for operating systems and productivity suites.</p>
+                        <ul>
+                            <li>PS4 and PS5 gaming consoles</li>
+                            <li>XBOX gaming consoles</li>
+                            <li>gaming screen</li>
+                            <li>Nintendo switches</li>
+                            <li>EA FC gaming disk sale</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <h2 class="section-title" style="color: white;">Our Service Process</h2>
+        
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Diagnosis</h3>
+                <p>We thoroughly examine your device to identify the exact issue and provide a accurate quote.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Quote & Approval</h3>
+                <p>We provide a transparent quote with no hidden costs and proceed only after your approval.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Professional Repair</h3>
+                <p>Our certified technicians perform the repair using high-quality parts and advanced tools.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Quality Testing</h3>
+                <p>We rigorously test your device to ensure everything works perfectly before returning it to you.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Need Professional Tech Services?</h2>
+        <p>Our team of expert technicians is ready to provide fast, reliable, and affordable solutions for all your technology needs.</p>
+        <button class="cta-button">Contact Us Today</button>
+    </section>
+
+    <!-- Footer -->    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Blue Technology</h3>
+                <p>Your trusted partner for all technology solutions in Nairobi. We specialize in sales, marketing, and professional repair services.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/bluetechnology.co.ke"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/BLUETECHNOLOG58"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/bluetechnology58"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@BlueTechnology58"><i class="fab fa-youtube"></i></a>
+                    <a href="https://wa.me/254707454182"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="products">Products</a></li>
+                    <li><a href="blog.html">Tips/Blog</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <a href="https://maps.app.goo.gl/242PM1ZStkDsmXBM7" target="_blank">KM behind Kenyatta University, Nairobi</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <a href="https://api.whatsapp.com/send/?phone=254707454182&text&type=phone_number&app_absent=0">0707 454 182</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <a href="mailto:bluetechnology58@gmail.com">bluetechnology58@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>Mon-Sat: 8:00 AM - 6:00 PM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Blue Technology. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+<script>
+        // Navigation toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-times');
+        });
+        
+        // Scroll animations
+        const animatedElements = document.querySelectorAll('.animated');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        animatedElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundPositionY = (scrolled * 0.5) + 'px';
+        });
+        
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabContainer = button.closest('.tabs-container');
+                const tabId = button.getAttribute('data-tab');
+                
+                // Deactivate all tabs in this container
+                tabContainer.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Deactivate all tab content in this container
+                tabContainer.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Activate the clicked tab
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+            
+            // Add hover functionality for desktop
+            button.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 768) {
+                    const tabContainer = button.closest('.tabs-container');
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Only activate on hover if no tab is active
+                    if (!tabContainer.querySelector('.tab-btn.active')) {
+                        button.classList.add('active');
+                        document.getElementById(tabId).classList.add('active');
+                    }
+                }
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    const tabContainer = button.closest('.tabs-container');
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Only deactivate on hover if no tab is actively selected
+                    if (!tabContainer.querySelector('.tab-btn.active')) {
+                        button.classList.remove('active');
+                        document.getElementById(tabId).classList.remove('active');
+                    }
+                }
+            });
+        });
+        
+        // Book service button functionality - REDIRECT TO BOOKINGS.HTML
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Redirect to bookings.html
+                window.location.href = 'bookings.html';
+            });
+        });
+
+        // Also update the CTA button in the CTA section
+        document.querySelector('.cta-section .cta-button').addEventListener('click', function() {
+            window.location.href = 'contact.html';
+        });
+    </script>
+</body>
+</html>

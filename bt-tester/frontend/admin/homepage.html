@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Blue Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #004ccc;
+            --secondary: #003a9d;
+            --accent: #00c2ff;
+            --accent-light: #5cd7ff;
+            --light: #f5f9ff;
+            --dark: #0a1a35;
+            --gray: #6b7280;
+            --success: #28a745;
+            --error: #dc3545;
+            --warning: #ffc107;
+            --sidebar-width: 250px;
+            --header-height: 70px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f5ff;
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header & Navigation */
+        .admin-header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.8rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: var(--header-height);
+        }
+        
+        .admin-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-header .logo-icon {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .admin-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .admin-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-nav a:hover, 
+        .admin-nav a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .admin-user img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Sidebar */
+        .admin-container {
+            display: flex;
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+        
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-sidebar h3 {
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover, 
+        .sidebar-menu a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .sidebar-menu i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            padding: 2rem;
+            margin-left: var(--sidebar-width);
+            transition: all 0.3s ease;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .welcome-section h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-section p {
+            opacity: 0.9;
+            max-width: 600px;
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .stat-icon.orders {
+            background: var(--primary);
+        }
+        
+        .stat-icon.revenue {
+            background: var(--success);
+        }
+        
+        .stat-icon.customers {
+            background: var(--accent);
+        }
+        
+        .stat-icon.products {
+            background: var(--warning);
+        }
+        
+        .stat-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+        
+        /* Recent Activity */
+        .activity-list {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .activity-item {
+            display: flex;
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-content h4 {
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+        
+        .activity-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .activity-time {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .action-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4极速px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 极速0, 0.1);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .action-card:hover .action-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0 auto 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .action-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+极速        .action-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .action-card:hover p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-sm {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-success {
+            background: var(--success);
+        }
+        
+        .notification-error {
+            background: var(--error);
+        }
+        
+        /* Animations */
+        .animated {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .admin-sidebar {
+                width: 200px;
+            }
+            
+            .admin-main {
+                margin-left: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 1rem;
+            }
+            
+            .admin-nav {
+                display: none;
+            }
+            
+            .admin-sidebar {
+                width: 70px;
+                padding: 1rem 0;
+            }
+            
+            .admin-sidebar h3, 
+            .sidebar-menu span {
+                display: none;
+            }
+            
+            .sidebar-menu a {
+                justify-content: center;
+                padding: 1rem;
+            }
+            
+            .admin-main {
+                margin-left: 70px;
+                padding: 1rem;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .admin-sidebar {
+                display: none;
+            }
+            
+            .admin-main {
+                margin-left: 0;
+            }
+            
+            .welcome-section h1 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Toggle Sidebar Button */
+        .sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .admin-sidebar.show {
+                width: var(--sidebar-width);
+                z-index: 999;
+            }
+            
+            .admin-sidebar.show h3,
+            .admin-sidebar.show .sidebar-menu span {
+                display: block;
+            }
+            
+            .admin-sidebar.show .sidebar-menu a {
+                justify-content: flex-start;
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <span>Blue Technology Admin</span>
+        </div>
+        
+        <button class极速="sidebar-toggle" id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="admin-user">
+            <img src="https://s6.imgcdn.dev/YNt1iL.jpg" alt="Admin User">
+            <span id="admin-username">Admin User</span>
+            <button class="btn btn-danger btn-sm" id="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <h3>Admin Panel</h3>
+            <ul class="sidebar-menu">
+                <li><a href="homepage.html" class="active"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a></li>
+                <li><a href="Bookings.html"><i class="fas fa-tools"></i> <span>Bookings</span></a></li>
+            </ul>
+        </aside>
+
+        <main class="admin-main">
+            <section class="welcome-section">
+                <h1>Welcome back, <span id="welcome-username">Admin</span>!</h1>
+                <p>Here's what's happening with your store today. Monitor sales, manage orders, and track performance from your dashboard.</p>
+            </section>
+            
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon orders">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-orders">0</h3>
+                            <p>Total Orders</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon revenue">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-revenue">KSh 0</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon customers">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-customers">0</h3>
+                            <p>Total Customers</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon products">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-products">0</h3>
+                            <p>Total Products</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="section-title">Recent Activity</h3>
+                
+                <div class="activity-list" id="recent-activity">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New Order Received</h4>
+                            <p>Customer placed a new order for iPhone repair</p>
+                        </div>
+                        <div class="activity-time">2 mins ago</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Order Completed</h4>
+                            <p>MacBook Pro repair was completed successfully</p>
+                        </div>
+                        <div class="activity-time">1 hour ago</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Low Stock Alert</h4>
+                            <p>Samsung Galaxy screens are running low</p>
+                        </div>
+                        <div class="activity-time">3 hours ago</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New Customer Registered</h4>
+                            <p>John Doe created a new account</p>
+                        </div>
+                        <div class="activity-time">5 hours ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Quick Actions</h3>
+            
+            <div class="quick-actions">
+                <div class="action-card" data-action="orders">
+                    <div class="action-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <h3>Add New Order</h3>
+                    <p>Create a new service order</p>
+                </div>
+                
+                <div class="action-card" data-action="products">
+                    <div class="action-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Manage Products</h3>
+                    <p>View and edit product inventory</p>
+                </div>
+                
+                <div class="action-card" data-action="services">
+                    <div class="action-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Service Management</h3>
+                    <p>Configure repair services</p>
+                </div>
+                
+                <div class="action-card" data-action="reports">
+                    <div class="action-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>View Reports</h3>
+                    <p>Analyze sales and performance</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="notification notification-success" id="success-notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text"></span>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true' || 
+                           sessionStorage.getItem('adminLoggedIn') === 'true';
+        
+        if (!isLoggedIn) {
+            window.location.href = 'login.html';
+        }
+        
+        // Get user info for display
+        const username = localStorage.getItem('adminUsername') || sessionStorage.getItem('adminUsername');
+        const userRole = localStorage.getItem('adminRole') || sessionStorage.getItem('adminRole');
+        
+        // DOM elements
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const adminSidebar = document.getElementById('admin-sidebar');
+        const logoutBtn = document.getElementById('logout-btn');
+        const adminUsername = document.getElementById('admin-username');
+        const welcomeUsername = document.getElementById('welcome-username');
+        
+        // Update user info in header
+        if (username) {
+            adminUsername.textContent = username;
+            welcomeUsername.textContent = username;
+        }
+        
+        // Toggle sidebar on mobile
+        sidebarToggle.addEventListener('click', function() {
+            adminSidebar.classList.toggle('show');
+        });
+        
+        // Logout functionality
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminUsername');
+            localStorage.removeItem('adminRole');
+            sessionStorage.removeItem('adminLoggedIn');
+            sessionStorage.removeItem('adminUsername');
+            sessionStorage.removeItem('adminRole');
+            window.location.href = 'login.html';
+        });
+
+        // Fetch dashboard data from API
+        async function fetchDashboardData() {
+            try {
+                // In a real implementation, you would fetch from your API
+                // const response = await fetch('/api/admin/dashboard');
+                // const data = await response.json();
+                
+                // For demonstration, we'll use mock data
+                const mockData = {
+                    totalOrders: 142,
+                    totalRevenue: 254800,
+                    totalCustomers: 87,
+                    totalProducts: 56
+                };
+                
+                // Update the dashboard with the data
+                document.getElementById('total-orders').textContent = mockData.totalOrders;
+                document.getElementById('total-revenue').textContent = `KSh ${mockData.totalRevenue.toLocaleString()}`;
+                document.getElementById('total-customers').textContent = mockData.totalCustomers;
+                document.getElementById('total-products').textContent = mockData.totalProducts;
+                
+            } catch (error) {
+                console.error('Failed to fetch dashboard data:', error);
+                showNotification('Failed to load dashboard data. Please try again later.', 'error');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('success-notification');
+            const notificationText = document.getElementById('notification-text');
+
+            notificationText.textContent = message;
+
+            if (type === 'error') {
+                notification.className = 'notification notification-error';
+            } else {
+                notification.className = 'notification notification-success';
+            }
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchDashboardData();
+            
+            // Add animation to cards
+            const cards = document.querySelectorAll('.card, .action-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animated');
+            });
+            
+            // Add event listeners to action cards
+            document.querySelectorAll('.action-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    showNotification(`Redirecting to ${action} page...`);
+                    // In a real implementation, you would navigate to the appropriate page
+                });
+            });
+        });
+    </script>
+</body>
+</html>
