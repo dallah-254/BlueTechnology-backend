@@ -1,0 +1,70 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String    @id @default(uuid())
+  username    String    @unique
+  password    String
+  phoneNumber String
+  email       String    @unique
+  role        String
+  imageUrl    String? // S3 image URL for user profile
+  orders      Order[]
+  bookings    Booking[]
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  stock       Int
+  imageUrl    String? // S3 image URL for product
+  orders      OrderItem[]
+}
+
+model Service {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  imageUrl    String? // S3 image URL for service
+  bookings    Booking[]
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  userId     String
+  status     String
+  createdAt  DateTime    @default(now())
+  items      OrderItem[]
+  user       User        @relation(fields: [userId], references: [id])
+  receiptId  String? // Unique ID for the receipt
+  receiptUrl String? // S3 URL for the receipt file
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Booking {
+  id         String   @id @default(uuid())
+  userId     String
+  serviceId  String
+  status     String
+  date       DateTime
+  receiptUrl String?
+  user       User     @relation(fields: [userId], references: [id])
+  service    Service  @relation(fields: [serviceId], references: [id])
+}
